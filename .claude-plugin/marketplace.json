@@ -3,8 +3,8 @@
   "name": "ai-sdlc-marketplace",
   "description": "AI-assisted software delivery lifecycle with mechanically enforced human approval gates",
   "owner": {
-    "name": "Zehra Lehen",
-    "email": "zehralehen@gmail.com"
+    "name": "Lehen Zehra",
+    "url": "https://github.com/lehen20"
   },
   "plugins": [
     {

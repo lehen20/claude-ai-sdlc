@@ -3,7 +3,18 @@
   "description": "Structured AI software delivery lifecycle with hook-enforced human approval gates. Planning, implementation, review and release packaging; project specifics live in a per-repo .aisdlc/profile.yml.",
   "version": "0.1.0",
   "author": {
-    "name": "Zehra Lehen",
-    "email": "zehralehen@gmail.com"
-  }
+    "name": "Lehen Zehra",
+    "url": "https://github.com/lehen20"
+  },
+  "homepage": "https://github.com/lehen20/claude-ai-sdlc",
+  "repository": "https://github.com/lehen20/claude-ai-sdlc",
+  "license": "MIT",
+  "keywords": [
+    "sdlc",
+    "governance",
+    "hooks",
+    "approval-gates",
+    "workflow",
+    "code-review"
+  ]
 }
