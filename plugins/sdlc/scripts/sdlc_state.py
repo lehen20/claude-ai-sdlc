@@ -79,14 +79,22 @@ def _split_top(text, sep=","):
     return [p.strip() for p in parts if p.strip()]
 
 
+_ESCAPES = {"n": "\n", "t": "\t", "r": "\r", "0": "\0",
+            '"': '"', "\\": "\\", "/": "/"}
+
+
 def _scalar(text):
     text = text.strip()
     if not text:
         return None
     if len(text) >= 2 and text[0] == text[-1] and text[0] in "\"'":
         body = text[1:-1]
-        # only double quotes process escapes, matching YAML
-        return body.encode().decode("unicode_escape") if text[0] == '"' else body
+        # Only double quotes process escapes, matching YAML. Done by
+        # substitution rather than `unicode_escape`, which round-trips through
+        # latin-1 and would turn a UTF-8 branch or brand name into mojibake.
+        if text[0] != '"':
+            return body
+        return re.sub(r"\\(.)", lambda m: _ESCAPES.get(m.group(1), m.group(0)), body)
     low = text.lower()
     if low in ("true", "yes"):
         return True
@@ -187,6 +195,20 @@ def repo_root(start=None):
         if parent == path:
             return None
         path = parent
+
+
+def is_inside(path, directory):
+    """True when `path` is `directory` or sits beneath it.
+
+    A bare `startswith` would treat `/repo/.aisdlcx` as inside `/repo/.aisdlc`,
+    which is enough to slip an edit past the plan gate by naming a directory
+    carefully.
+    """
+    if not path or not directory:
+        return False
+    path = os.path.abspath(path)
+    directory = os.path.abspath(directory)
+    return path == directory or path.startswith(directory + os.sep)
 
 
 def profile_path(root=None):
