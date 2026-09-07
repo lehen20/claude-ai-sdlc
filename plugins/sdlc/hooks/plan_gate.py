@@ -26,8 +26,7 @@ def main():
         S.allow()
 
     # Artifacts and profile are always writable.
-    normalized = os.path.abspath(target) if target else ""
-    if normalized.startswith(os.path.join(root, S.WORK_ROOT)):
+    if target and S.is_inside(target, os.path.join(root, S.WORK_ROOT)):
         S.allow()
 
     state = S.load_state(root=root)
