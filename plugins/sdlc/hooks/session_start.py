@@ -3,7 +3,7 @@
 
 Injects the profile summary and any in-flight workflow so a session that starts
 after /clear, or tomorrow, knows the phase, tier, pending gate, and that pushes
-are gated. This is what makes /sdlc:resume cheap.
+are gated. This is what lets a workflow survive /clear and resume tomorrow.
 """
 
 import os
@@ -56,7 +56,7 @@ def main():
             "- unsigned gates: %s" % (", ".join(pending) or "none"),
             "- artifacts: .aisdlc/work/%s/" % state.get("id"),
             "",
-            "Run `/sdlc:status` for detail, or `/sdlc:resume` to continue it.",
+            "Run `/sdlc:status` for detail before continuing it.",
         ]
     else:
         lines += ["", "No workflow in flight. Start one with `/sdlc:feature` or `/sdlc:fix`."]
