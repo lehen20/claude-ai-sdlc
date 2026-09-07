@@ -1,3 +1,16 @@
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# ai-sdlc runtime state (the profile itself IS committed)
+.aisdlc/work/
+.aisdlc/active
+
+# Editors / OS
 .DS_Store
+.idea/
+.vscode/
+*.swp

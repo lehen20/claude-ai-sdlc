@@ -1,6 +1,6 @@
 ---
 name: sdlc-workflow
-description: This skill should be used when running an ai-sdlc delivery workflow — when the user invokes /sdlc:feature, /sdlc:fix, /sdlc:resume or /sdlc:status, when a repo contains .aisdlc/profile.yml and work needs planning, implementing, reviewing or releasing, or when a release gate or plan gate has blocked a command and the next step is unclear. Defines phase transitions, which subagent runs at each phase, gate semantics and the artifact contract.
+description: This skill should be used when running an ai-sdlc delivery workflow — when the user invokes /sdlc:feature, /sdlc:fix or /sdlc:status, when a repo contains .aisdlc/profile.yml and work needs planning, implementing, reviewing or releasing, or when a release gate or plan gate has blocked a command and the next step is unclear. Defines phase transitions, which subagent runs at each phase, gate semantics and the artifact contract.
 version: 0.1.0
 ---
 

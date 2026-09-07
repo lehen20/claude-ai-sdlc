@@ -28,7 +28,7 @@ def main():
     if not directory or not os.path.isdir(directory):
         S.emit(None)
 
-    if os.path.abspath(target).startswith(os.path.join(root, S.WORK_ROOT)):
+    if S.is_inside(target, os.path.join(root, S.WORK_ROOT)):
         S.emit(None)  # don't log the workflow logging itself
 
     try:

@@ -1,0 +1,46 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.11", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Run tests
+        run: python -m unittest discover -s tests -v
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Byte-compile every hook and script
+        run: python -m compileall -q plugins/sdlc/hooks plugins/sdlc/scripts tests
+      - name: Validate plugin manifests
+        run: |
+          python -c "import json; json.load(open('.claude-plugin/marketplace.json'))"
+          python -c "import json; json.load(open('plugins/sdlc/.claude-plugin/plugin.json'))"
+          python -c "import json; json.load(open('plugins/sdlc/hooks/hooks.json'))"
+      - name: Parse the profile template with the bundled reader
+        run: |
+          python -c "
+          import sys; sys.path.insert(0, 'plugins/sdlc/scripts')
+          import sdlc_state as S
+          p = S.parse_yaml(open('plugins/sdlc/templates/profile.yml').read())
+          assert p['branch']['base'], 'template failed to parse'
+          print('profile template OK')
+          "
