@@ -1,0 +1,9 @@
+{
+  "name": "sdlc",
+  "description": "Structured AI software delivery lifecycle with hook-enforced human approval gates. Planning, implementation, review and release packaging; project specifics live in a per-repo .aisdlc/profile.yml.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Zehra Lehen",
+    "email": "zehralehen@gmail.com"
+  }
+}
