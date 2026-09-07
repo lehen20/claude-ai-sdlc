@@ -1,0 +1,54 @@
+# ai-sdlc project profile
+#
+# This file is the ONLY place project specifics live. The plugin itself never
+# names a repo, service, branch, environment or tracker -- it reads them here.
+# Commit this file. `.aisdlc/work/` should be gitignored.
+#
+# Parsed by a bundled YAML-subset reader (no pyyaml dependency). Stick to the
+# shapes below: nested maps, block lists, inline [a, b] and {k: v}, quoted
+# strings. Run `/sdlc:init --validate` after editing by hand.
+
+version: 1
+
+brand:
+  name: "Your Team"          # cosmetic only; appears in generated PR bodies
+
+repos: [ your-service ]
+
+branch:
+  base: main                 # what feature branches cut from and PR into
+  protected: [ main ]        # never pushed to directly, never force-pushed
+  prefixes: { feature: feat, fix: fix, refactor: refactor, chore: chore }
+
+environments: [ dev, staging, production ]   # ordered promotion chain
+
+# OPTIONAL. Delete this block entirely for ticketless workflows.
+ticket:
+  pattern: "^[A-Z]+-[0-9]+$"
+  tracker_url: "https://example.atlassian.net/browse/{id}"
+
+# The planner only asks about domains declared here.
+impact_domains: [ api, database ]
+
+shared_packages: []
+
+commands:
+  test: "npm test"
+  lint: "npm run lint"
+  build: "npm run build"
+  typecheck: "npm run typecheck"
+
+# Any change touching these forces the Full tier regardless of size.
+high_risk_paths:
+  - "**/auth/**"
+  - "**/migrations/**"
+  - "**/*secret*"
+
+# Commands the AI may never run, signature or not. Extend per project.
+deny_patterns:
+  - "^kubectl\\s+apply"
+  - "^helm\\s+upgrade"
+  - "^terraform\\s+apply"
+  - "^serverless\\s+deploy"
+
+severity_levels: [ P0, P1, P2, P3 ]

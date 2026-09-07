@@ -1,0 +1,17 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "ai-sdlc-marketplace",
+  "description": "AI-assisted software delivery lifecycle with mechanically enforced human approval gates",
+  "owner": {
+    "name": "Zehra Lehen",
+    "email": "zehralehen@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "sdlc",
+      "description": "Structured AI software delivery lifecycle: planning, implementation, review and release packaging behind hook-enforced human approval gates. Project specifics live in a per-repo .aisdlc/profile.yml, so the framework is reusable across any stack.",
+      "category": "workflow",
+      "source": "./plugins/sdlc"
+    }
+  ]
+}
